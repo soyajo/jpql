@@ -5,9 +5,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ORDERS")
 public class Orders {
+
     @Id
     @GeneratedValue
     private Long id;
+
     private int orderAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -16,6 +18,22 @@ public class Orders {
 
     @Embedded
     private Address address;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Long getId() {
         return id;

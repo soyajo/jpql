@@ -1,9 +1,7 @@
 package jpql;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args){
@@ -13,7 +11,26 @@ public class JpaMain {
         tx.begin();
         try {
 
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
+            Member member = new Member();
+            member.setUsername("teamA");
+            member.setAge(10);
+
+            member.setTeam(team);
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            String query = "select m from Member m join Team t on m.username = t.name";
+            List<Member> resultList = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            System.out.println("resultList.size() = " + resultList.size());
 
             tx.commit();
 
@@ -23,8 +40,6 @@ public class JpaMain {
         }finally {
             em.close();
         }
-
         emf.close();
-
     }
 }
