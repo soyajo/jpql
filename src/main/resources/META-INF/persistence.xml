@@ -18,6 +18,7 @@
             <property name="hibernate.use_sql_comments" value="true"/>
             <!--jpa 배치형식으로 commit-->
             <property name="hibernate.jdbc.batch_size" value="10"/>
+            <property name="hibernate.default_batch_fetch_size" value="100"/>
             <!--
                 애플리케이션이 시작했을 때 DB DDL을 자동으로 실행하는 것
                 왠만하면 사용하면 안됨.
